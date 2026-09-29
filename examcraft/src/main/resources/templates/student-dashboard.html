@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Student Dashboard</title><link rel="stylesheet" th:href="@{/css/style.css(v=3)}"></head>
+<body>
+<header><h1>ExamCraft - Student Dashboard</h1><a href="/">Logout</a></header>
+<main class="container">
+<div class="card"><h2>Available Tests</h2>
+<table><tr><th>ID</th><th>Title</th><th>Questions</th><th>Distribution</th><th>Action</th></tr>
+<tr th:each="p : ${papers}">
+<td th:text="${p.id}"></td><td th:text="${p.title}"></td><td th:text="${p.totalQuestions}"></td><td th:text="${p.difficultyDistribution}"></td>
+<td><a class="button" th:href="@{'/student/test/' + ${p.id}}">Attempt Test</a></td>
+</tr></table>
+<p th:if="${#lists.isEmpty(papers)}">No test papers have been generated yet.</p>
+</div>
+</main>
+</body></html>

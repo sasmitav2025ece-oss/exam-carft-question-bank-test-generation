@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Result</title><link rel="stylesheet" th:href="@{/css/style.css(v=3)}"></head>
+<body class="center-page">
+<div class="card result-card">
+<h1>Test Submitted</h1>
+<p>Attempt ID: <b th:text="${attempt.id}"></b></p>
+<p>Student: <b th:text="${attempt.user.name}"></b></p>
+<p>Test: <b th:text="${attempt.testPaper.title}"></b></p>
+<div class="score" th:text="${#numbers.formatDecimal(attempt.score, 1, 2) + '%'}">0%</div>
+<a class="button" href="/student/dashboard">Back to Tests</a>
+</div>
+</body></html>

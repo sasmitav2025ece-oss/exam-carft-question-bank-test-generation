@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Generate Test</title><link rel="stylesheet" th:href="@{/css/style.css(v=3)}"></head>
+<body>
+<header><h1>Generate Random Test Paper</h1><a href="/staff/dashboard">Dashboard</a></header>
+<main class="container">
+<div class="card">
+<div th:if="${error}" class="error" th:text="${error}"></div>
+<h2>Test Configuration</h2>
+<form method="post" action="/staff/generate" class="form-grid">
+<input name="title" placeholder="Test title" required>
+<label>Easy<input type="number" name="easy" value="2" min="0" required></label>
+<label>Medium<input type="number" name="medium" value="2" min="0" required></label>
+<label>Hard<input type="number" name="hard" value="1" min="0" required></label>
+<button type="submit">Generate Test Paper</button>
+</form>
+<p class="hint">The system shuffles questions and never repeats the same question within one generated paper.</p>
+</div>
+<div class="card">
+<h2>Generated Test Papers</h2>
+<table><tr><th>ID</th><th>Title</th><th>Total</th><th>Distribution</th><th>Created</th></tr>
+<tr th:each="p : ${papers}">
+<td th:text="${p.id}"></td><td th:text="${p.title}"></td><td th:text="${p.totalQuestions}"></td>
+<td th:text="${p.difficultyDistribution}"></td><td th:text="${p.createdAt}"></td>
+</tr></table>
+</div>
+</main>
+</body></html>

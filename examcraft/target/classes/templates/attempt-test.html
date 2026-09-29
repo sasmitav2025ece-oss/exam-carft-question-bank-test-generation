@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Attempt Test</title><link rel="stylesheet" th:href="@{/css/style.css(v=3)}"></head>
+<body>
+<header><h1 th:text="${paper.title}">Test</h1><a href="/student/dashboard">Back</a></header>
+<main class="container">
+<div class="card">
+<p><b>Total Questions:</b> <span th:text="${paper.totalQuestions}"></span></p>
+<form th:action="@{'/student/test/' + ${paper.id} + '/submit'}" method="post">
+<label>Student ID <input type="number" name="userId" value="2" required></label>
+<div th:each="item : ${items}" class="question-box">
+<h3 th:text="${item.sequenceNo + '. ' + item.question.questionText}"></h3>
+<div th:each="opt, stat : ${item.question.options}">
+<label class="option">
+<input type="radio" th:name="${'q_' + item.question.id}" th:value="${T(java.lang.String).format('%s', T(java.lang.Character).toUpperCase(T(java.lang.Character).forDigit(stat.index, 10)))}">
+<span th:text="${#strings.substring('ABCD', stat.index, stat.index + 1) + '. ' + opt}"></span>
+</label>
+</div>
+</div>
+<button type="submit">Submit Test</button>
+</form>
+</div>
+</main>
+</body></html>

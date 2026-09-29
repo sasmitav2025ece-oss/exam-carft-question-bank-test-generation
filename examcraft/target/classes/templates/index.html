@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExamCraft</title>
+    <link rel="stylesheet" th:href="@{/css/style.css(v=3)}">
+</head>
+<body class="center-page">
+<div class="card login-card">
+    <h1>ExamCraft</h1>
+    <p>Question Bank with Randomized Test Generation</p>
+    <div th:if="${param.error}" class="error">Invalid login details.</div>
+    <form method="post" action="/login">
+        <label>Email</label>
+        <input type="email" name="email" required placeholder="admin@examcraft.com">
+        <label>Password</label>
+        <input type="password" name="password" required placeholder="admin123">
+        <label>Role</label>
+        <select name="role">
+            <option value="ADMIN">Staff / Admin</option>
+            <option value="STUDENT">Student</option>
+        </select>
+        <button type="submit">Login</button>
+    </form>
+    <p class="hint">Demo accounts are listed in README.md.</p>
+</div>
+</body>
+</html>

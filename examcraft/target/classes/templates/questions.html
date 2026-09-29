@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Questions</title><link rel="stylesheet" th:href="@{/css/style.css(v=3)}"></head>
+<body>
+<header><h1>Question Bank</h1><a href="/staff/dashboard">Dashboard</a></header>
+<main class="container">
+<div class="card">
+<h2>Add Question</h2>
+<form method="post" action="/staff/questions" class="form-grid">
+<select name="topicId" required><option value="">Select Topic</option><option th:each="t : ${topics}" th:value="${t.id}" th:text="${t.name}"></option></select>
+<select name="difficulty" required><option>Easy</option><option>Medium</option><option>Hard</option></select>
+<textarea name="questionText" placeholder="Question text" required></textarea>
+<input name="optionA" placeholder="Option A" required><input name="optionB" placeholder="Option B" required>
+<input name="optionC" placeholder="Option C" required><input name="optionD" placeholder="Option D" required>
+<select name="correctOption" required><option value="A">Correct: A</option><option value="B">Correct: B</option><option value="C">Correct: C</option><option value="D">Correct: D</option></select>
+<button type="submit">Add Question</button>
+</form>
+<p class="hint">Create topics first. The correct option is stored as A/B/C/D.</p>
+</div>
+<div class="card">
+<h2>Question Bank</h2>
+<table>
+<tr><th>ID</th><th>Question</th><th>Topic</th><th>Difficulty</th><th>Action</th></tr>
+<tr th:each="q : ${questions}">
+<td th:text="${q.id}"></td><td th:text="${q.questionText}"></td><td th:text="${q.topic.name}"></td><td th:text="${q.difficulty}"></td>
+<td><form th:action="@{'/staff/questions/' + ${q.id} + '/delete'}" method="post"><button class="danger" type="submit">Delete</button></form></td>
+</tr>
+</table>
+</div>
+</main>
+</body></html>
